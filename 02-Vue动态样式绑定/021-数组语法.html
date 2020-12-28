@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"> 
+    <div v-bind:class="[classA, classB]">Hello !</div>
+    <div v-bind:class="[{ showClass: isShow }, classB]"></div>
+  </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+ var vm = new Vue({
+	el: '#app',
+  data: {
+    isShow: false,
+  	classA: 'classA',
+    classB: 'classB1 classB2'
+  },
+})
+</script>
+</html>

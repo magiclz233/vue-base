@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .hide {
+        display: none;
+    }
+</style>
+<body>
+    <div id="app">
+        <div v-bind:class="{hide: isHide}">Hello!</div>
+        <div v-bind:class="{show: isShow, 'text-danger': hasError}">Hello!</div>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                isHide: true,
+                isShow: true,
+                hasError: false
+            }
+        },
+    })
+</script>
+</html>
