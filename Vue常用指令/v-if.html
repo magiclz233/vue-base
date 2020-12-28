@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../vue.js"></script>
+<body>
+    <div id = "app">
+        <p v-if="seed">if为true则能看见</p>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    // seed: false
+                    seed: true
+                }
+            },
+        })
+    </script>
+</body>
+</html>

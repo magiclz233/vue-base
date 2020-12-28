@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="../vue.js"></script>
+<body>
+    <div id = "app-2">
+        <span v-bind:title="message">
+            悬浮鼠标查看动态绑定的提示信息!
+        </span>
+        <span :title="message">
+            悬浮鼠标查看动态绑定的提示信息!
+        </span>
+
+        <div>
+            <a v-bind:href="href">百度</a>
+        </div>
+        <div>
+            <a :href="href">百度</a>
+        </div>
+
+        <div>
+            <img v-bind:src="src">
+        </div>
+        <div>
+            <img :src="src">
+        </div>
+
+        <div>
+            <button v-bind:disabled="disabled">禁用按钮</button>
+        </div>
+        <div>
+            <button :disabled="disabled">禁用按钮</button>
+        </div>
+    </div>
+
+    <script>
+        var app2 = new Vue({
+            el:  "#app-2",
+            data:{
+                message : '页面加载于' + new Date().toLocaleString(),
+                href: 'https://www.baidu.com',
+                disabled: true,
+                src: 'http://img2.mukewang.com/szimg/5df1deec09ba554712000676-360-202.png'
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <label>年龄：</label>
+      <input v-model="age"/>
+    </div>
+    <!-- 模板只会在第一次更新时显示数据，此后再次更新该 DOM 里面引用的数据时，内容不会自动更新。 -->
+    <div v-once>当前输入的年龄是: {{age}}</div>
+    <div>当前输入的年龄是: {{age}}</div>
+  </div>
+</body>
+<script src="../vue.js"></script>
+<script type="text/javascript">
+var vm = new Vue({
+	el: '#app',
+  data: {
+  	age: 10
+  }
+})
+</script>
+</html>
