@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>商品数量：{{count}} 个</h1>
+        <h1>商品单价：{{unitPrice}} 元</h1>
+        <h1>商品总价：{{totalPrice()}} 元</h1>
+        <button @click="changePrice">修改单价</button>
+        <button @click="changeCount">修改数量</button>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                count: 10,
+                unitPrice: 24
+            }
+        },
+        computed: {
+            totalPrice() {
+                return this.computed * this.unitPrice
+            }
+        },
+        methods: {
+            changePrice() {
+                vm.unitPrice = vm.unitPrice + 1
+            },
+            changeCount() {
+                vm.count = vm.count + 1
+            }
+        },
+    })
+</script>
+
+</html>
