@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app">
+        {{ name }}
+        <button @click="updateName">更新</button>
+        <button @click="destroy">销毁</button>
+      </div>
+</body>
+<script src="../vue.js"></script>
+
+<script>
+     var vm = new Vue({
+    el: '#app',
+    data: {
+      name:'hello !'
+    },
+    methods : {
+      updateName() {
+        console.log('准备修改名字啦！')
+        this.name = 'hello 慕课！'
+      },
+      destroy(){
+        vm.$destroy()
+      }
+    },
+    beforeCreate() {
+      // 此时页面数据未初始化
+      console.log('beforeCreate:' + this.name) // beforeCreate： undefined
+    },
+    created() {
+      // 页面数据已经初始化
+      console.log('created:' + this.name) // beforeCreate： hello !
+    },
+    beforeMount() {
+      console.log('beforeMount:' + this.name) // beforeCreate： hello !
+    },
+    mounted() {
+      console.log('mounted:' + this.name) // beforeCreate： hello !
+    },
+    // 点击更新按钮后会先触发 beforeUpdate
+    beforeUpdate() {
+      console.log('beforeUpdate:' + this.name) // beforeCreate： hello 慕课！
+    },
+    updated() {
+      console.log('updated:' + this.name) // updated hello 慕课 !
+    },
+    // 点击销毁按钮后会先触发 beforeDestroy
+    beforeDestroy(){
+      console.log('beforeDestroy: before destroy') // beforeDestroy: before destroy
+    },
+    destroyed(){
+      console.log('destroyed: success') // destroyed: success
+      // 在这之后点击页面 更新 按钮将无任何效果
+    }
+  });
+</script>
+</html>

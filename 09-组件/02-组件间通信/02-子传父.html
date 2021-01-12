@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 子组件通过 $emit 传递事件给父组件，父组件通过 $on 监听事件 -->
+
+<body>
+    <div id="app">
+        <parent></parent>
+    </div>
+    <script src="../../vue.js"></script>
+    <script>
+        Vue.component('parent', {
+            template: '<div><child :name="name" :count="count" @add="add"/></div>',
+            data() {
+                return {
+                    name: '句号',
+                    count: 18
+                }
+            },
+            // 父组件通过 @事件名 监听
+            // count是参数
+            methods: {
+                add(count) {
+                    this.count = count
+                }
+            }
+        })
+        Vue.component('child', {
+            template: '<div>我是：{{name}}， 我今年 {{count}}岁。<button @click="add">加一岁</button></div>',
+            props: {
+                name: {
+                    type: String,
+                    default: '句号'
+                },
+                count: {
+                    type: Number,
+                    default: 18
+                }
+            },
+            methods: {
+                add() {
+                    this.$emit('add', this.count + 1)
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {}
+            }
+        })
+    </script>
+</body>
+
+</html>

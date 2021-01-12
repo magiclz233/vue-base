@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+
+</head>
+<body>
+    <div id="app">
+        <my-component>
+            <span slot="name">Magic</span>
+            <span slot="time">2021-01-12</span>
+        </my-component>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component('MyComponent',{
+            template: '<div>Hello ！<slot name="name"></slot> <slot name="time"></slot></div>'
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>商品数量 {{count}}</div>
+        <button @click="count = count + 1">加一个</button>
+        <button @click="add">加一个</button>
+        <button @click="setCount(10, $event)">加十个</button>
+        <button @click="setCount(5, $event)">加五个</button>
+        <button @click="setZero(0, $event)">归零</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                add() {
+                    this.count = this.count + 1
+                },
+                setCount(count, event){
+                    this.count = this.count + count
+                    console.log(event)
+                },
+                setZero(count, event){
+                    this.count = count
+                    console.log(event)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

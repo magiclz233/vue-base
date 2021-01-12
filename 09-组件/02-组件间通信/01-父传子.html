@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<!-- 父组件通过 props 属性向子组件传递数据。子组件利用组件实例的 props 属性定义组件需要接收的参数，在使用组件时通过 attribute的方式传入参数 -->
+<body>
+  <div id="app">
+    <parent></parent>
+  </div>
+</body>
+<script src="../../vue.js"></script>
+<script type="text/javascript">
+  Vue.component('parent', {
+    template: '<child :name="name"></child>',
+    data() {
+      return {
+        name: '句号'
+      }
+    }
+  })
+  Vue.component('child', {
+    template: '<div>{{name}}</div>',
+    props: ['name']
+  })
+  var vm = new Vue({
+    el: '#app',
+    data() {
+    	return {}
+    }
+  })
+</script>
+</html>

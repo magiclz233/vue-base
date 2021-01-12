@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 假设现在有三个组件分别是<Parent>、<ChildA>、<ChildB>，其中组件<Parent>是<ChildA>和<ChildB>的父组件，
+    <ChildA>和<ChildB>为兄弟组件，<ChildA>和<ChildB>组件间的通信可以借助<Parent>来间接传递。它的流程大致是这样：
+    <ChildA>通过$emit将数据传递给<Parent>，<Parent>再通过props将数据传递给<ChildB> 。 -->
+
+<body>
+    <div id="app">
+        <person @modify="modify"></person>
+        <detail :name="name" :count="count"/>   
+    </div>
+
+
+    <script src="../../vue.js"></script>
+    <script>
+        Vue.component('person', {
+            template: `
+            <div>
+                <div>
+                    姓名：<input type="text" v-model="name"/>
+                </div>
+                <div>
+                    年龄：<input type="text" v-model="count"/>
+                </div>
+                <button @click="modify">修改</button>
+            </div>`,
+            data() {
+                return {
+                    name: '句号',
+                    count: 18
+                }
+            },
+            methods: {
+                modify() {
+                    this.$emit('modify', {
+                        name: this.name,
+                        count: this.count
+                    })
+                }
+            }
+        })
+        Vue.component('detail', {
+            template: '<div>我是：{{name}}， 我今年 {{count}}岁。</div>',
+            props: {
+                name: {
+                    type: String,
+                    default: '句号'
+                },
+                count: {
+                    type: Number,
+                    default: 18
+                }
+            },
+            methods: {}
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: '句号',
+                    count: 18
+                }
+            },
+            methods: {
+                modify(detail) {
+                    this.name = detail.name
+                    this.count = parseInt(detail.count)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        height: 400px;
+      overflow-x: auto;
+      flex: 1;
+    }
+    
+    .container div{
+        height: 20px;
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- stop案例 -->
+        <div @click="clickTargetContainer">
+            <button @click.stop="clickTargetA">点击stop案例</button>
+            <button @click="clickTargetA">无stop案例</button>
+        </div>
+
+        <!-- submit.prevent 案例 -->
+        <form action="/" method="get" @submit.prevent="submit">
+            <button type="submit">点我提交表单</button>
+        </form>
+
+
+        <form method="get" action="https://www.baidu.com" @submit="submit">
+            <button type="submit">点我提交表单跳转百度</button>
+        </form>
+
+        <div @click.capture="capture">
+            <button @click.stop="clickTargetA">点我 capture 案例</button>
+        </div>
+
+        <!-- self 案例 -->
+        <div @click.self="clickTargetContainer" style="padding: 20px;border: 1px solid #cccccc;">
+            <button @click="clickTargetA">点我 self 案例</button>
+        </div>
+
+        <!-- once 案例 -->
+        <div>
+            <button @click.once="clickTargetA">点我 once 案例</button>
+        </div>
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            methods: {
+                clickTargetContainer() {
+                    alert('父级容器点击事件触发')
+                },
+                clickTargetA() {
+                    alert('按钮标签点击事件触发')
+                },
+                submit() {
+                    alert('提交表单了')
+                },
+                capture() {
+                    alert('虽然你点击的是内部元素，但是我先触发！')
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

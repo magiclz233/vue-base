@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 你可以将组件进行任意次数的复用，他们之间相互独立，互不影响： -->
+        <my-component></my-component>
+        <my-component />
+        <my-component />
+    </div>
+    <script src="../../vue.js"></script>
+    <script>
+        Vue.component('MyComponent', {
+            template: '<div><div>{{ count }}</div><button @click="add">添加次数</button></div>',
+            data() {
+                return {
+                    count: 10
+                }
+            },
+            methods: {
+                add() {
+                    this.count = this.count + 1
+                }
+            },
+            created() {
+                console.log('组件MyComponent created')
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {}
+            }
+        })
+    </script>
+</body>
+
+</html>

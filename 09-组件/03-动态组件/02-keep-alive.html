@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <keep-alive>
+      <component :is="currentView"></component>
+    </keep-alive>
+    <button @click="changeView('A')">切换到A</button>
+    <button @click="changeView('B')">切换到B</button>
+    <button @click="changeView('C')">切换到C</button>
+  </div>
+</body>
+<script src="../../vue.js"></script>
+<script>
+  Vue.component('ComponentA', {
+    template: '<div> 组件 A </div>',
+    created() {
+      console.log('组件A created')
+    }
+  })
+  Vue.component('ComponentB', {
+    template: '<div> 组件 B </div>',
+    created() {
+      console.log('组件B created')
+    }
+  })
+  Vue.component('ComponentC', {
+    template: '<div> 组件 C </div>',
+    created() {
+      console.log('组件C created')
+    }
+  })
+  var vm = new Vue({
+    el: '#app',
+    data() {
+    	return {
+        currentView: 'ComponentB'
+      }
+    },
+    methods: {
+      changeView(name) {
+        this.currentView = `Component${name}`
+      }
+    }
+  })
+</script>
+</html>

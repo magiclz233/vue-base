@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="name" placeholder="请输入商品名称">
+        <p>名称是: {{ name }}</p>
+        <textarea v-model="desc" placeholder="请输入商品简介"></textarea>
+        <p>简介: {{ desc }}</p>
+
+        <div>
+            <input type="checkbox" v-model="isDelivery" id="delivery">
+            <label for="delivery">{{isDelivery}}</label>
+            <span>选项: {{ isDelivery }}</span>     
+        </div>
+
+
+        <!-- 多个复选框 -->
+        <div>
+            <input type="checkbox" id="food" value="食品" v-model="types">
+            <label for="food">食品</label>
+            <input type="checkbox" id="book" value="图书" v-model="types">
+            <label for="book">图书</label>
+            <input type="checkbox" id="clothes" value="衣服" v-model="types">
+            <label for="clothes">衣服</label>
+            <br>
+            <span>类型: {{ types }}</span>
+          </div>
+
+          <!-- 单选按钮 -->
+          <div>
+              <input type="radio" value="1" id="yes" v-model="isFree">
+              <label for="one">是</label>
+              <input type="radio" value="0" id="no" v-model="isFree">
+              <label for="no">否</label> 
+              <br>
+              <span>选择: {{ isFree }}</span>
+          </div>
+
+          <!-- 下拉选择框 -->
+          <div>
+              <select v-model="company">
+                  <option value="">请选择</option>
+                  <option>顺丰</option>
+                  <option>中通</option>
+                  <option>圆通</option>
+              </select>
+              <br>
+              <span>选项: {{ company }}</span>
+          </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: '',
+                    desc: '',
+                    isDelivery: false,
+                    types: [],
+                    isFree: '',
+                    company: ''
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

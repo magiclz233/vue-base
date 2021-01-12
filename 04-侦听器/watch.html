@@ -15,7 +15,7 @@
         <button v-on:click="add">加一个</button>
         <button v-on:click="addCart">加入购物车</button>
         <div v-for="(item, index) in list" :key="index">
-            {{item.name}} x{{item.count}}
+            {{item.name}} x {{item.count}}
         </div>
     </div>
     <script src="../vue.js"></script>

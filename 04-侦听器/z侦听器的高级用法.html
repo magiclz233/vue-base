@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>商品名称: <input v-model="name"></div>
+
+        <div>商品名称：<input v-model="product.name"/></div>
+        <div>商品数量：<input v-model="product.count"/></div>
+        <div>商品标题：<input v-model="product.title"/></div>
+
+    </div>
+
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: '方便面',
+                    product: {
+                        name: '',
+                        count: '',
+                        title: ''
+                    }
+                }
+            },
+            watch: {
+                name: {
+                    // watch 默认就是handler方法
+                    handler(newVal, oldVal){
+                        console.log(newVal)
+                    },
+                    // 侦听器最初绑定的时候就触发一次
+                    immediate: true
+                },
+                product: {
+                    handler: function(newVal){
+                        console.log(newVal)
+                    },
+                    // 深度监听, product的三个属性发生变化时都会触发handler
+                    deep: true
+                }
+
+            },
+        })
+    </script>
+</body>
+
+</html>
