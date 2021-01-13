@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <router-link to="/index">首页</router-link>
+            <router-link to="/article">文章</router-link>
+        </div>
+        <router-view></router-view>
+    </div>
+</body>
+
+<script src="../../vue.js"></script>
+<script src="../../vue-router.js"></script>
+<script>
+    const Index = Vue.component('index', {
+        template: '<div>Hello，欢迎使用慕课网学习 Vue 教程！</div>'
+    })
+    const Article = Vue.component('myArticle', {
+        template: `<ul><li>1. Vue 计算属性的学习</li><li>2. React 基础学习</li></ul>`,
+    })
+
+    const routes = [
+        {path: '/index', component: Index},
+        {path: '/article', component: Article}
+    ]
+
+    const router = new VueRouter({
+       routes: routes 
+    })
+
+    var vm = new Vue({
+        el: '#app',
+        router: router,
+        data() {
+            return {
+            }
+        },
+    })
+</script>
+
+</html>
