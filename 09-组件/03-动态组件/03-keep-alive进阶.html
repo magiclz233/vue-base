@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- include 和 exclude 是 keep-alive 的两个属性，允许组件有条件地缓存。
+include： 可以是字符串或正则表达式，用来表示只有名称匹配的组件会被缓存。
+exclude： 可以是字符串或正则表达式，用来表示名称匹配的组件不会被缓存。 -->
+
+<body>
+    <div id="app">
+        <!-- <keep-alive include="ComponentA,ComponentB"> -->
+        <keep-alive exclude="ComponentA,ComponentB">
+            <component :is="currentView"></component>
+        </keep-alive>
+        <button @click="changeView('A')">切换到A</button>
+        <button @click="changeView('B')">切换到B</button>
+        <button @click="changeView('C')">切换到C</button>
+    </div>
+    <script src="../../vue.js"></script>
+    <!-- activated 和 deactivated 和我们之前学习的生命周期函数一样，也是组件的生命周期函数。
+        不过， activated 和 deactivated 只在 <keep-alive> 内的所有嵌套组件中触发。
+        activated：进入组件时触发。deactivated：退出组件时触发。 -->
+    <script>
+    
+        Vue.component('ComponentA', {
+            template: '<div> 组件 A </div>',
+            created() {
+                console.log('组件A created')
+            },
+            activated() {
+                console.log('组件A 被添加')
+            },
+            deactivated() {
+                console.log('组件A 被移除')
+            }
+        })
+        Vue.component('ComponentB', {
+            template: '<div> 组件 B </div>',
+            created() {
+                console.log('组件B created')
+            },
+            activated() {
+                console.log('组件B 被添加')
+            },
+            deactivated() {
+                console.log('组件B 被移除')
+            }
+        })
+        Vue.component('ComponentC', {
+            template: '<div> 组件 C </div>',
+            created() {
+                console.log('组件C created')
+            },
+            activated() {
+                console.log('组件C 被添加')
+            },
+            deactivated() {
+                console.log('组件C 被移除')
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    currentView: 'ComponentB'
+                }
+            },
+            methods: {
+                changeView(name) {
+                    this.currentView = `Component${name}`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
