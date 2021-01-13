@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-color:[colorstyle]="color" style="border: 1px solid #ccc;">Hello ！</div>
+        <div v-color:[borderstyle]="color" style="border: 1px solid #ccc;">Hello ！</div>
+        <div v-color:[backgroundstyle]="color" style="border: 1px solid #ccc;">Hello ！</div>
+        <button @click="changeColor">切换颜色</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.directive('color', {
+            bind: function (el, binding, vnode) {
+                var s = binding.arg
+                el.style[s] = binding.value
+            },
+            update(el, binding) {
+                var s = binding.arg
+                el.style[s] = binding.value
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    color: 'red',
+                    colorstyle: 'color',
+                    borderstyle: 'border-color',
+                    backgroundstyle: 'background-color',
+                }
+            },
+            methods: {
+                changeColor() {
+                    this.color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+                }
+            }
+        })
+    </script>
+    <script>
+
+    </script>
+</body>
+
+</html>

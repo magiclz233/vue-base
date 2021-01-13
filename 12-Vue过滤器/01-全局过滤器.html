@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label>英文名：</label>
+            <input type="text" v-model="name" />
+        </div>
+        <div>{{ name | capitalize}}</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        // 英文首字母大写
+        Vue.filter('capitalize', function(value){
+            if(!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: ''
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

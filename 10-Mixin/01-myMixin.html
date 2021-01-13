@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        我是: {{name}}, 年龄: {{year}}
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var myMixin = {
+            data() {
+                return {
+                    name: '句号'
+                }
+            },
+            created: function () {
+                this.mixinFun()
+            },
+            methods: {
+                mixinFun: function () {
+                    console.log('mixin function')
+                }
+            }
+        };
+        var vm = new Vue({
+            el: '#app',
+            mixins: [myMixin],
+            data() {
+                return {
+                    year: '18'
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

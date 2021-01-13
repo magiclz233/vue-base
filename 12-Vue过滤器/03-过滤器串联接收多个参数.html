@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label>英文名：</label>
+            <input type="text" v-model="name" />
+        </div>
+        <div>{{ name | trim | capitalize}}</div>
+
+        <div>
+            <label>个数：</label>
+            <input type="number" v-model="count"/>
+            <label>单位： 1000 </label>
+          </div>
+          <div>单价： {{price}} / 个</div>
+          <div>总价： {{ count | sum(price, unit)}}</div>
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        // 英文首字母大写
+        Vue.filter('capitalize', function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+        })
+        Vue.filter('sum', function (value, price, unit) {
+            return value * price * unit
+        })
+        Vue.filter('trim', function (value) {
+            return value.replace(/^\s+|\s+$/g, "")
+        })
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: '',
+                    count: 0,
+                    unit: 1000,
+                    price: 20
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
