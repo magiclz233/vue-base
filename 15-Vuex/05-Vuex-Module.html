@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>模块 A 数量：{{moduleACount}}</div>
+    <div>根节点 数量：{{rootCount}}</div>
+    <div>数量总和：{{countSum}}</div>
+    <button @click="addModuleCount">模块 A + 1</button>
+    <button @click="addRootToModule">添加 root 至模块</button>
+  </div>
+</body>
+<script src="../vue.js"></script>
+<script src="../vuex.js"></script>
+<script type="text/javascript">
+  const moduleA = {
+    state: {
+      count: 18
+    },
+    getters: {
+      countSum(state, getters, rootState) {
+        return state.count + rootState.count
+      }
+    },
+    mutations: {
+      addModuleCount(state) {
+        state.count++
+      },
+      addModuleByCount(state, payload) {
+        state.count = state.count + payload.count
+      }
+    },
+    actions: {
+      addRootToModule({state, commit, rootState}) {
+        commit('addModuleByCount', {count: rootState.count})
+      }
+    }
+  }
+  const store = new Vuex.Store({
+    modules: {
+      a: moduleA,
+    },
+    state: {
+      count: 20
+    }
+  })
+  var vm = new Vue({
+    el: '#app',
+    store,
+    computed: {
+      countSum() {
+        return this.$store.getters.countSum
+      },
+      moduleACount() {
+        return this.$store.state.a.count
+      },
+      rootCount() {
+        return this.$store.state.count
+      }
+    },
+    methods: {
+      addModuleCount() {
+        this.$store.commit('addModuleCount')
+      },
+      addRootToModule() {
+        this.$store.dispatch('addRootToModule')
+      }
+    }
+  })
+</script>
+</html>

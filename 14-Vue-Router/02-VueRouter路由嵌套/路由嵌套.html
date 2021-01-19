@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <router-link to="/index">首页</router-link>
+            <router-link to="/article">文章</router-link>
+        </div>
+        <router-view></router-view>
+    </div>
+</body>
+
+<script src="../../vue.js"></script>
+<script src="../../vue-router.js"></script>
+<script>
+    const Index = Vue.component('index', {
+        template: `
+        <div>Hello，欢迎使用慕课网学习 Vue 教程！</div>
+        `
+    })
+    // <router-link to="/article/vue">vue</router-link>
+    // <router-link to="/article/react">react</router-link>
+    const Article = Vue.component('article', {
+        template: `
+        <div>
+            <div>
+                <router-link to="/vueArticle">vue</router-link>
+                <router-link to="/reactArticle">react</router-link>
+            </div>
+            <router-view></router-view>
+        </div>
+        `
+    })
+
+    const VueArticle = Vue.component('vueArticle', {
+        template: `<ul><li>1. Vue 基础学习</li><li>2. Vue 项目实战</li></ul>`,
+    })
+
+    const ReactArticle = Vue.component('reactArticle', {
+        template: `<ul><li>1. React 基础学习</li><li>2. React 项目实战</li></ul>`,
+    })
+
+    const routes = [{
+            path: '/index',
+            component: Index
+        },
+        {
+            path: '/article',
+            component: Article,
+            // children: [{
+            //         path: 'vue',
+            //         component: VueArticle
+            //     },
+            //     {
+            //         path: 'react',
+            //         component: ReactArticle
+            //     }
+            // ]
+            children: [{
+                    path: '/vueArticle',
+                    component: VueArticle
+                },
+                {
+                    path: '/reactArticle',
+                    component: ReactArticle
+                }
+            ]
+        }
+    ]
+
+    const router = new VueRouter({
+        routes: routes
+    })
+
+    var vm = new Vue({
+        el: '#app',
+        router,
+        data() {
+            return {}
+        },
+    })
+</script>
+
+</html>

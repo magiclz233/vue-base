@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>购物车数量：{{count}}</div>
+    <button @click="add">同步 +1</button>
+    <button @click="addAsync">1s后 +1</button>
+    <button @click="addAsyncParams">2s后 +1</button>
+  </div>
+</body>
+<script src="../vue.js"></script>
+<script src="../vuex.js"></script>
+<script type="text/javascript">
+  const store = new Vuex.Store({
+    state: {
+      count: 0
+    },
+    mutations: {
+      increment(state) {
+        state.count++
+      }
+    },
+    actions: {
+      increment ({commit}) {
+        commit('increment')
+      },
+      incrementAsync ({commit}) {
+        setTimeout(() => {
+          commit('increment')
+        }, 1000)
+      },
+      incrementAsyncParams ({commit}, payload) {
+        setTimeout(() => {
+          commit('increment')
+        }, payload.time)
+      }
+    }
+  })
+  var vm = new Vue({
+    el: '#app',
+    store,
+    methods: {
+      add() {
+        this.$store.dispatch('increment')
+      },
+      addAsync() {
+        this.$store.dispatch({
+          type: 'incrementAsync',
+        })
+      },
+      addAsyncParams() {
+        this.$store.dispatch('incrementAsyncParams', {
+          time: 2000
+        })
+      },
+    },
+    computed: {
+      count() {
+        return this.$store.state.count
+      }
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>购物车数量：{{count}}</div>
+    <button @click="add">无参 mutation（+1）</button>
+    <button @click="addTen">携参 mutation（+10）</button>
+    <button @click="addByObject">携带对象类型的参数 mutation（+5）</button>
+    <button @click="commitByObject">对象类型提交 mutation（+3）</button>
+  </div>
+</body>
+<script src="../vue.js"></script>
+<script src="../vuex.js"></script>
+<script type="text/javascript">
+  const store = new Vuex.Store({
+    state: {
+      count: 0
+    },
+    mutations: {
+      // 无参 mutation
+      increment(state) {
+        state.count++
+      },
+      // 带参 mutation
+      incrementByCount(state, count) {
+        state.count = state.count + count
+      },
+      // 对象类型参数 mutation
+      incrementByObject(state, payload) {
+        state.count = state.count + payload.count
+      },
+    },
+  })
+  var vm = new Vue({
+    el: '#app',
+    store,
+    methods: {
+      add() {
+        this.$store.commit('increment')
+      },
+      addTen() {
+        this.$store.commit('incrementByCount', 10)
+      },
+      addByObject() {
+        this.$store.commit('incrementByObject', {
+          count: 5
+        })
+      },
+      commitByObject() {
+        this.$store.commit( {
+          type: 'incrementByObject',
+          count: 3
+        })
+      }
+    },
+    computed: {
+      count() {
+        return this.$store.state.count
+      }
+    }
+  })
+</script>
+</html>
